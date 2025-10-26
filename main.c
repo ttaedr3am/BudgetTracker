@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "user_auth.h"
 #include "tracker.h"
-#include "goals_reminders.h"
+#include "goals_reminder.h"
 
 int main() {
     int choice, loggedIn = 0;
