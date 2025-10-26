@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "user_auth.h"
-#include "tracker.h"
-#include "goals_reminder.h"
+#include "summary.h"
+#include "goals_reminders.h"
 
 int main() {
     int choice, loggedIn = 0;
@@ -23,6 +23,7 @@ int main() {
                     scanf("%s", username);
                     loadGoalsFromFile(&goalHead, username);
                     loggedIn = 1;
+                    setBudget(); // Nakshatra’s budget setup on login
                 }
                 break;
             case 3: exit(0);
@@ -31,39 +32,40 @@ int main() {
 
         while (loggedIn) {
             printf("\n--- MAIN MENU ---\n");
-            printf("1. Add Transaction\n");
-            printf("2. View Transactions\n");
-            printf("3. Calculate Balance\n");
-            printf("4. Manage Saving Goals\n");
-            printf("5. View Goal Reminders\n");
-            printf("6. View Give/Take Reminders\n");
-            printf("7. Logout\n");
+            printf("1. Add Expense\n");
+            printf("2. View Expenses\n");
+            printf("3. Show Pie Chart Summary\n");
+            printf("4. Show Budget Notification\n");
+            printf("5. Manage Saving Goals\n");
+            printf("6. View Goal Reminders\n");
+            printf("7. View Give/Take Reminders\n");
+            printf("8. Logout\n");
             printf("Enter your choice: ");
             scanf("%d", &choice);
 
             switch (choice) {
-                case 1: addTransaction(username); break;
-                case 2: viewTransactions(username); break;
-                case 3: calculateBalance(username); break;
+                case 1: addExpense(); break;
+                case 2: viewExpenses(); break;
+                case 3: showPieChart(); break;
+                case 4: showNotification(calculateTotal()); break;
 
-                case 4: {
+                case 5: {
                     int gch;
                     printf("\n--- SAVING GOAL SECTION ---\n");
                     printf("1. Add Goal\n2. Update Goal\n3. View Goals\n4. Back\nChoice: ");
                     scanf("%d", &gch);
                     if (gch == 1) {
                         addGoal(&goalHead);
-                        // also create reminder
                         addGoalReminder(username, goalHead->name, goalHead->deadline);
                     } else if (gch == 2) updateGoal(goalHead);
                     else if (gch == 3) viewGoals(goalHead);
                     break;
                 }
 
-                case 5: viewGoalReminders(username); break;
-                case 6: viewPaymentReminders(username); break;
+                case 6: viewGoalReminders(username); break;
+                case 7: viewPaymentReminders(username); break;
 
-                case 7:
+                case 8:
                     saveGoalsToFile(goalHead, username);
                     loggedIn = 0;
                     break;
