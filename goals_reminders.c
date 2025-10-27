@@ -65,7 +65,7 @@ void viewGoals(struct Goal *head) {
 
 void saveGoalsToFile(struct Goal *head, const char *username) {
     char filename[100];
-    sprintf(filename, "data/goals_%s.txt", username);
+    sprintf(filename, "goals_%s.txt", username);
     FILE *fp = fopen(filename, "w");
     if (!fp) return;
     while (head) {
@@ -77,7 +77,7 @@ void saveGoalsToFile(struct Goal *head, const char *username) {
 
 void loadGoalsFromFile(struct Goal **head, const char *username) {
     char filename[100];
-    sprintf(filename, "data/goals_%s.txt", username);
+    sprintf(filename, "goals_%s.txt", username);
     FILE *fp = fopen(filename, "r");
     if (!fp) return;
 
@@ -95,7 +95,7 @@ void loadGoalsFromFile(struct Goal **head, const char *username) {
 
 void addGoalReminder(const char *username, const char *goalName, const char *deadline) {
     char filename[100];
-    sprintf(filename, "data/goal_reminders_%s.txt", username);
+    sprintf(filename, "goal_reminders_%s.txt", username);
     FILE *fp = fopen(filename, "a");
     if (!fp) {
         printf("Error saving goal reminder.\n");
@@ -108,7 +108,7 @@ void addGoalReminder(const char *username, const char *goalName, const char *dea
 
 void viewGoalReminders(const char *username) {
     char filename[100];
-    sprintf(filename, "data/goal_reminders_%s.txt", username);
+    sprintf(filename, "goal_reminders_%s.txt", username);
     FILE *fp = fopen(filename, "r");
     if (!fp) {
         printf("No goal reminders found.\n");
@@ -129,7 +129,7 @@ void viewGoalReminders(const char *username) {
 
 void addPaymentReminder(const char *username, const char *type, float amount, const char *person) {
     char filename[100];
-    sprintf(filename, "data/payment_reminders_%s.txt", username);
+    sprintf(filename, "payment_reminders_%s.txt", username);
 
     FILE *fp = fopen(filename, "a");
     if (!fp) {
@@ -147,7 +147,7 @@ void addPaymentReminder(const char *username, const char *type, float amount, co
 
 void viewPaymentReminders(const char *username) {
     char filename[100];
-    sprintf(filename, "data/payment_reminders_%s.txt", username);
+    sprintf(filename, "payment_reminders_%s.txt", username);
     FILE *fp = fopen(filename, "r");
     if (!fp) {
         printf("No payment reminders.\n");
