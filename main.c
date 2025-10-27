@@ -3,6 +3,7 @@
 #include "user_auth.h"
 #include "summary.h"
 #include "goals_reminders.h"
+#include "expenses.h"
 
 int main() {
     int choice, loggedIn = 0;
@@ -34,22 +35,24 @@ int main() {
             printf("\n--- MAIN MENU ---\n");
             printf("1. Add Expense\n");
             printf("2. View Expenses\n");
-            printf("3. Show Pie Chart Summary\n");
-            printf("4. Show Budget Notification\n");
-            printf("5. Manage Saving Goals\n");
-            printf("6. View Goal Reminders\n");
-            printf("7. View Give/Take Reminders\n");
-            printf("8. Logout\n");
+            printf("3. View Monthly Summary\n");
+            printf("4. Show Pie Chart Summary\n");
+            printf("5. Show Budget Notification\n");
+            printf("6. Manage Saving Goals\n");
+            printf("7. View Goal Reminders\n");
+            printf("8. View Give/Take Reminders\n");
+            printf("9. Logout\n");
             printf("Enter your choice: ");
             scanf("%d", &choice);
 
             switch (choice) {
                 case 1: addExpense(); break;
                 case 2: viewExpenses(); break;
-                case 3: showPieChart(); break;
-                case 4: showNotification(calculateTotal()); break;
+                case 3:monthlySummary(expenses, count);break;
+                case 4: showPieChart(); break;
+                case 5: showNotification(calculateTotal()); break;
 
-                case 5: {
+                case 6: {
                     int gch;
                     printf("\n--- SAVING GOAL SECTION ---\n");
                     printf("1. Add Goal\n2. Update Goal\n3. View Goals\n4. Back\nChoice: ");
@@ -62,10 +65,10 @@ int main() {
                     break;
                 }
 
-                case 6: viewGoalReminders(username); break;
-                case 7: viewPaymentReminders(username); break;
+                case 7: viewGoalReminders(username); break;
+                case 8: viewPaymentReminders(username); break;
 
-                case 8:
+                case 9:
                     saveGoalsToFile(goalHead, username);
                     loggedIn = 0;
                     break;
