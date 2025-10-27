@@ -1,13 +1,11 @@
 #ifndef EXPENSES_H
 #define EXPENSES_H
 
-#define MAX_EXPENSES 100
+// Include summary.h to get the definition of struct Expense
+#include "summary.h"
 
-struct Expense {
-    char category[20];
-    float amount;
-};
-
-void monthlySummary(struct Expense expenses[], int count);
+// CHANGED: Function declaration updated to use global variables,
+// so it no longer needs parameters.
+void monthlySummary();
 
 #endif
