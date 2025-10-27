@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "user_auth.h"
-#include "summary.h"
+#include "user_auth.h" 
+// CHANGED: Include summary.h first 
+#include "summary.h" 
+// CHANGED: expenses.h now includes summary.h
+#include "expenses.h" 
 #include "goals_reminders.h"
-#include "expenses.h"
+
 
 int main() {
     int choice, loggedIn = 0;
@@ -17,14 +20,14 @@ int main() {
         scanf("%d", &choice);
 
         switch (choice) {
-            case 1: signup(); break;
+            case 1: signup(); break; 
             case 2:
-                if (login()) {
+                if (login()) { 
                     printf("Enter your username again: ");
                     scanf("%s", username);
                     loadGoalsFromFile(&goalHead, username);
                     loggedIn = 1;
-                    setBudget(); // Nakshatra’s budget setup on login
+                    setBudget(); // 
                 }
                 break;
             case 3: exit(0);
@@ -46,11 +49,12 @@ int main() {
             scanf("%d", &choice);
 
             switch (choice) {
-                case 1: addExpense(); break;
-                case 2: viewExpenses(); break;
-                case 3:monthlySummary(expenses, count);break;
-                case 4: showPieChart(); break;
-                case 5: showNotification(calculateTotal()); break;
+                case 1: addExpense(); break; // 
+                case 2: viewExpenses(); break; // 
+                // CHANGED: Call now takes no arguments
+                case 3: monthlySummary(); break;
+                case 4: showPieChart(); break; // 
+                case 5: showNotification(calculateTotal()); break; // 
 
                 case 6: {
                     int gch;
@@ -59,7 +63,9 @@ int main() {
                     scanf("%d", &gch);
                     if (gch == 1) {
                         addGoal(&goalHead);
-                        addGoalReminder(username, goalHead->name, goalHead->deadline);
+                        if (goalHead) { // Good practice check
+                            addGoalReminder(username, goalHead->name, goalHead->deadline);
+                        }
                     } else if (gch == 2) updateGoal(goalHead);
                     else if (gch == 3) viewGoals(goalHead);
                     break;
