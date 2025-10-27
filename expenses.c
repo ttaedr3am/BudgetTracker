@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include "expenses.h"
+#include "summary.h" // Include to get global 'expenses' and 'count'
 
-void monthlySummary(struct Expense expenses[], int count) {
+// CHANGED: Function now uses global 'expenses' and 'count'
+// from summary.c, so it takes no parameters.
+void monthlySummary() {
     float food = 0, travel = 0, rent = 0, others = 0;
 
     // Summing expenses category-wise
+    // USES GLOBAL 'count' and 'expenses' 
     for (int i = 0; i < count; i++) {
         if (strcmp(expenses[i].category, "Food") == 0)
             food += expenses[i].amount;
